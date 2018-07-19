@@ -20,3 +20,19 @@ function produtoInterno(vetorA,vetorB){
     escalar += (vetorA[2]*vetorB[2]);
     return escalar;
 }
+
+function projecaoVetores(vetorB,vetorA){
+    let escalar = (produtoInterno(vetorA,vetorB)/produtoInterno(vetorB,vetorB));
+    let proj ={};
+    proj[0] = null;
+    proj[0] = (escalar*vetorB[0]);
+
+    proj[1] = null;
+    proj[1] = (escalar*vetorB[1]);
+
+    proj[2] = null;
+    proj[2] = (escalar*vetorB[2]);
+
+    return proj;
+}
+
