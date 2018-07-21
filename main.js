@@ -35,4 +35,39 @@ function projecaoVetores(vetorB,vetorA){
 
     return proj;
 }
+function multiplicarVetorPorEscalar(escalar, vetorA){
+    let vetorB = {};
+    vetorB[0] = null;
+    vetorB[0] = (escalar * vetorA[0]);
 
+    vetorB[1] = null;
+    vetorB[1] = (escalar * vetorA[1]);
+
+    vetorB[2] = null;
+    vetorB[2] = (escalar * vetorA[2]);
+
+    return vetorB;
+}
+
+function moduloVetor(vetorA){
+    let modulo;
+    modulo = 0;
+    modulo += (Math.pow(vetorA[0], 2));
+    modulo += (Math.pow(vetorA[1], 2));
+    modulo += (Math.pow(vetorA[2], 2));
+    modulo = Math.sqrt(modulo);
+
+    return modulo;
+}
+
+function normalizarVetor(vetorA){
+    let vetorB={};
+    let aux;
+    aux = 0;
+    aux = (1/moduloVetor(vetorA));
+    vetorB = multiplicarVetorPorEscalar(aux, vetorA);
+
+    return vetorB;
+}
+var resultado = normalizarVetor([-1,-2,2]);
+console.log(resultado);
