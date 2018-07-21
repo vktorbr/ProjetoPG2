@@ -36,3 +36,23 @@ function projecaoVetores(vetorB,vetorA){
     return proj;
 }
 
+function NormalizacaoVetor(vetorA){
+    let vetorB = {};
+    let magnitude;
+    magnitude = 0;
+    magnitude += vetorA[0]*vetorA[0];
+    magnitude += vetorA[1]*vetorA[1];
+    magnitude += vetorA[2]*vetorA[2];
+    magnitude = Math.sqrt(magnitude);
+    
+    vetorB[0] = null;
+    vetorB[0] = vetorA[0]/magnitude;
+
+    vetorB[1] = null;
+    vetorB[1] = vetorA[1]/magnitude;
+
+    vetorB[2] = null;
+    vetorB[2]=  vetorA[2]/magnitude;
+    
+    return vetorB;
+}
