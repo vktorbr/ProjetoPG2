@@ -56,3 +56,17 @@ function NormalizacaoVetor(vetorA){
     
     return vetorB;
 }
+
+function MultVetorEscalar(vetorA, escalar){
+    let vetorB = {};
+    vetorB[0] = null;
+    vetorB[0] = vetorA[0]*escalar;
+    
+    vetorB[1] = null;
+    vetorB[1] = vetorA[1]*escalar;
+    
+    vetorB[2] = null;
+    vetorB[2] = vetorA[2]*escalar;
+    
+    return vetorB;
+}
