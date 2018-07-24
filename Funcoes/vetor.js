@@ -69,5 +69,3 @@ function normalizarVetor(vetorA){
 
     return vetorB;
 }
-var resultado = normalizarVetor([-1,-2,2]);
-console.log(resultado);
