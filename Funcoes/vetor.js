@@ -82,3 +82,11 @@ function OrtogonalizarVetor(vetorV, vetorN){
     return vetorOrto;
 }
 
+function SomaVetores(vetorA,vetorB){
+    let vetorC = new Vetor();
+    vetorC.x = vetorA.x+vetorB.x;
+    vetorC.y = vetorA.y+vetorB.y;
+    vetorC.z = vetorA.z+vetorB.z;
+
+    return vetorC;
+}
