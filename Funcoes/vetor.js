@@ -1,13 +1,19 @@
+class Vetor{
+
+    constructor(x,y,z){
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+}
+
 function produtoVetorial(vetorA,vetorB){
-    let vetorC={};
-    vetorC[0] = null;
-    vetorC[0] = (vetorA[1]*vetorB[2]) - (vetorA[2]*vetorB[1]);
+    let vetorC= new Vetor();
+    vetorC.x = (vetorA.y*vetorB.z) - (vetorA.z*vetorB.y);
 
-    vetorC[1] = null;
-    vetorC[1] = (vetorA[2]*vetorB[0]) - (vetorA[0]*vetorB[2]);
+    vetorC.y = (vetorA.z*vetorB.x) - (vetorA.x*vetorB.z);
 
-    vetorC[2] = null;
-    vetorC[2] = (vetorA[0]*vetorB[1]) - (vetorA[1]*vetorB[0]);
+    vetorC.z = (vetorA.x*vetorB.y) - (vetorA.y*vetorB.x);
 
     return vetorC;
 }
@@ -15,36 +21,29 @@ function produtoVetorial(vetorA,vetorB){
 function produtoInterno(vetorA,vetorB){
     let escalar;
     escalar = 0;
-    escalar += (vetorA[0]*vetorB[0]);
-    escalar += (vetorA[1]*vetorB[1]);
-    escalar += (vetorA[2]*vetorB[2]);
+    escalar += (vetorA.x*vetorB.x);
+    escalar += (vetorA.y*vetorB.y);
+    escalar += (vetorA.z*vetorB.z);
     return escalar;
 }
 
 function projecaoVetores(vetorB,vetorA){
-    let escalar = (produtoInterno(vetorA,vetorB)/produtoInterno(vetorB,vetorB));
-    let proj ={};
-    proj[0] = null;
-    proj[0] = (escalar*vetorB[0]);
-
-    proj[1] = null;
-    proj[1] = (escalar*vetorB[1]);
-
-    proj[2] = null;
-    proj[2] = (escalar*vetorB[2]);
+    let escalar = (produtoInterno(vetorA,vetorB)/produtoInterno(vetorB,vetorB)); 
+    let proj = new Vetor();
+    
+    proj.x = (escalar*vetorB.x);
+    proj.y = (escalar*vetorB.y);
+    proj.z = (escalar*vetorB.z);
 
     return proj;
 }
+
 function multiplicarVetorPorEscalar(escalar, vetorA){
-    let vetorB = {};
-    vetorB[0] = null;
-    vetorB[0] = (escalar * vetorA[0]);
-
-    vetorB[1] = null;
-    vetorB[1] = (escalar * vetorA[1]);
-
-    vetorB[2] = null;
-    vetorB[2] = (escalar * vetorA[2]);
+    let vetorB = new Vetor();
+    
+    vetorB.x = (escalar * vetorA.x);
+    vetorB.y = (escalar * vetorA.y);
+    vetorB.z = (escalar * vetorA.z);
 
     return vetorB;
 }
@@ -52,20 +51,34 @@ function multiplicarVetorPorEscalar(escalar, vetorA){
 function moduloVetor(vetorA){
     let modulo;
     modulo = 0;
-    modulo += (Math.pow(vetorA[0], 2));
-    modulo += (Math.pow(vetorA[1], 2));
-    modulo += (Math.pow(vetorA[2], 2));
+    modulo += (Math.pow(vetorA.x, 2));
+    modulo += (Math.pow(vetorA.y, 2));
+    modulo += (Math.pow(vetorA.z, 2));
     modulo = Math.sqrt(modulo);
 
     return modulo;
 }
 
-function normalizarVetor(vetorA){
-    let vetorB={};
+function normalizarVetor(vetorA){    
+    let vetorB= new Vetor();
+    
     let aux;
     aux = 0;
     aux = (1/moduloVetor(vetorA));
+    
     vetorB = multiplicarVetorPorEscalar(aux, vetorA);
 
     return vetorB;
 }
+
+function OrtogonalizarVetor(vetorV, vetorN){
+    let vetorOrto = new Vetor();
+   
+    let proj = projecaoVetores(vetorN,vetorV);
+    vetorOrto.x = vetorV.x - proj.x;
+    vetorOrto.y = vetorV.y - proj.y;
+    vetorOrto.z = vetorV.z - proj.z;
+    
+    return vetorOrto;
+}
+
