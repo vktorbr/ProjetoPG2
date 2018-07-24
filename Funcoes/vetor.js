@@ -35,38 +35,37 @@ function projecaoVetores(vetorB,vetorA){
 
     return proj;
 }
-
-function NormalizacaoVetor(vetorA){
+function multiplicarVetorPorEscalar(escalar, vetorA){
     let vetorB = {};
-    let magnitude;
-    magnitude = 0;
-    magnitude += vetorA[0]*vetorA[0];
-    magnitude += vetorA[1]*vetorA[1];
-    magnitude += vetorA[2]*vetorA[2];
-    magnitude = Math.sqrt(magnitude);
-    
     vetorB[0] = null;
-    vetorB[0] = vetorA[0]/magnitude;
+    vetorB[0] = (escalar * vetorA[0]);
 
     vetorB[1] = null;
-    vetorB[1] = vetorA[1]/magnitude;
+    vetorB[1] = (escalar * vetorA[1]);
 
     vetorB[2] = null;
-    vetorB[2]=  vetorA[2]/magnitude;
-    
+    vetorB[2] = (escalar * vetorA[2]);
+
     return vetorB;
 }
 
-function MultVetorEscalar(vetorA, escalar){
-    let vetorB = {};
-    vetorB[0] = null;
-    vetorB[0] = vetorA[0]*escalar;
-    
-    vetorB[1] = null;
-    vetorB[1] = vetorA[1]*escalar;
-    
-    vetorB[2] = null;
-    vetorB[2] = vetorA[2]*escalar;
-    
+function moduloVetor(vetorA){
+    let modulo;
+    modulo = 0;
+    modulo += (Math.pow(vetorA[0], 2));
+    modulo += (Math.pow(vetorA[1], 2));
+    modulo += (Math.pow(vetorA[2], 2));
+    modulo = Math.sqrt(modulo);
+
+    return modulo;
+}
+
+function normalizarVetor(vetorA){
+    let vetorB={};
+    let aux;
+    aux = 0;
+    aux = (1/moduloVetor(vetorA));
+    vetorB = multiplicarVetorPorEscalar(aux, vetorA);
+
     return vetorB;
 }
