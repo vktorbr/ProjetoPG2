@@ -1,22 +1,53 @@
+var arquivo_objetos = [];
+var arquivo_iluminacao;
+var arquivo_camera;
 
-var arquivo ="";
+var upFile = function(parametro) {
+
+    if(parametro=="id_objetos"){
+        var objectsFileSelected = document.getElementById('id_objetos').files;
+        for (let i = 0; i < objectsFileSelected.length; i++) {
+            var objectsFileTobeRead = objectsFileSelected[i];
+            var objectsFileReader = new FileReader();
+            objectsFileReader.onload = function (e) {
+                arquivo_objetos[i] = objectsFileReader.result;
+                decomporArquivo(); 
+            }
+            objectsFileReader.readAsText(objectsFileTobeRead);
+        }
+    }
+    else if(parametro=="id_camera"){
+        var cameraFileSelected = document.getElementById('id_camera');
+        var cameraFileTobeRead = cameraFileSelected.files[0];
+        var cameraFileReader = new FileReader();
+        cameraFileReader.onload = function (e){
+            arquivo_camera = cameraFileReader.result;
+        }
+        cameraFileReader.readAsText(cameraFileTobeRead);
+    }
+    else{
+        var illumFileSelected = document.getElementById('id_iluminacao');
+        var illumFileTobeRead = illumFileSelected.files[0];
+        var illumFileReader = new FileReader();
+        illumFileSelected.onload = function (e){
+            arquivo_iluminacao = illumFileReader.result;
+        }
+        illumFileReader.readAsText(illumFileTobeRead);
+    }
+
+var objetos ="";
 
 window.onload = function () {
     //Verifica se o navegador suporta a api
     if (window.File && window.FileReader && window.FileList && window.Blob) {
-        var fileSelected = document.getElementById('txtfiletoread');
+        var fileSelected = document.getElementById('id_objetos');
         fileSelected.addEventListener('change', function (e) {
             //Get the file object
             var fileTobeRead = fileSelected.files[0];
                 //Initialize the FileReader object to read the 2file
                 var fileReader = new FileReader();
-                fileReader.onload = (function(f) {
-                    return function(e){
-
-                    };
-                })()
                 fileReader.onload = function (e) { 
-                    arquivo=fileReader.result;
+                    objetos=fileReader.result;
                     decomporArquivo();
                 }
                 fileReader.readAsText(fileTobeRead);
@@ -28,8 +59,8 @@ window.onload = function () {
 }
 
 function decomporArquivo(){
-    var linhas = arquivo.split('\n');
-    //console.log(arquivos);
+    var linhas = objetos.split('\n');
+    //console.log(objetos);
     var qtd = linhas[0].split(' ');
     qtd[0] = parseInt(qtd[0]);
     qtd[1] = parseInt(qtd[1]);
@@ -61,3 +92,5 @@ function decomporArquivo(){
 
     
 }
+
+*/
