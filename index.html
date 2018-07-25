@@ -13,7 +13,6 @@
         <option>calice2</option>
         <option>camaro</option>
     </select>-->
-    <input id="txtfiletoread" type="file" multiple>
     <script src="App/iluminacao.js"></script>
     <script src="App/main.js"></script>
     <script src="App/objeto.js"></script>
@@ -26,6 +25,18 @@
 
 </head>
 <body>
+    <div class="files">
+        <div id="objetos">
+            <input id="id_objetos" type="file" accept=".byu" onchange="upFile('id_objetos')" multiple/>
+        </div>
+        <div id="camera">
+            <input id="id_camera" type="file" accept=".cfg" onchange="upFile('id_camera')"/>
+        </div>
+        <div id="iluminacao">
+            <input id="id_iluminacao" type="file" accept=".txt" onchange="upFile('id_iluminacao')"/>
+        </div>
+    </div>
+
 
 </body>
     
