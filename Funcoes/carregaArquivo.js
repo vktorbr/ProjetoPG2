@@ -6,15 +6,36 @@ var upFile = function(parametro) {
 
     if(parametro=="id_objetos"){
         var objectsFileSelected = document.getElementById('id_objetos').files;
-        for (let i = 0; i < objectsFileSelected.length; i++) {
-            var objectsFileTobeRead = objectsFileSelected[i];
-            var objectsFileReader = new FileReader();
-            objectsFileReader.onload = function (e) {
-                arquivo_objetos[i] = objectsFileReader.result;
-                decomporArquivo(); 
+        //for (let i = 0; i < objectsFileSelected.length; i++) {
+            var objectsFileTobeRead = objectsFileSelected;
+            //console.log(objectsFileSelected[i].name);
+            let indice=0;
+            var objectsFileReader = [];
+            for (let i = 0; i < objectsFileSelected.length; i++) {
+                objectsFileReader[i] = new FileReader();
             }
-            objectsFileReader.readAsText(objectsFileTobeRead);
-        }
+            //objectsFileReader = new FileReader();
+            //objectsFileReader.readAsText(objectsFileTobeRead);
+            objectsFileReader[indice].onload = function (e) {
+                //console.log(objectsFileReader.result);
+                console.log(objectsFileReader);
+                for (let j = 0; j < objectsFileSelected.length; j++) {
+                    console.log(j);
+                
+                    arquivo_objetos[j] = objectsFileReader[j].result;
+                    console.log("\n\n\nDocumento objeto: \n\n");
+                    console.log(arquivo_objetos[j]);
+                    decomporArquivo(j); 
+                //indice++;
+                }
+            }
+            console.log(objectsFileTobeRead);
+            while(indice<objectsFileSelected.length){
+                //objectsFileReader[indice] = new FileReader();
+                objectsFileReader[indice].readAsText(objectsFileTobeRead[indice]);
+                indice++;
+            }
+        //}
     }
     else if(parametro=="id_camera"){
         var cameraFileSelected = document.getElementById('id_camera');
@@ -22,21 +43,30 @@ var upFile = function(parametro) {
         var cameraFileReader = new FileReader();
         cameraFileReader.onload = function (e){
             arquivo_camera = cameraFileReader.result;
+            console.log("\n\n\ndocumento camera:\n\n");
+            console.log(cameraFileReader.result);
+            
         }
         cameraFileReader.readAsText(cameraFileTobeRead);
     }
     else{
         var illumFileSelected = document.getElementById('id_iluminacao');
+        
         var illumFileTobeRead = illumFileSelected.files[0];
         var illumFileReader = new FileReader();
-        illumFileSelected.onload = function (e){
+        illumFileReader.onload = function (e){
             arquivo_iluminacao = illumFileReader.result;
+            console.log("\n\n\nDocumento iluminação:\n\n");
+            console.log(illumFileReader.result);
+            
+            
         }
         illumFileReader.readAsText(illumFileTobeRead);
+        
     }
-
+}
 var objetos ="";
-
+/*
 window.onload = function () {
     //Verifica se o navegador suporta a api
     if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -56,10 +86,10 @@ window.onload = function () {
     else {
         alert("Arquivo(s) não suportado(s)");
     }
-}
+}*/
 
-function decomporArquivo(){
-    var linhas = objetos.split('\n');
+function decomporArquivo(indice){
+    var linhas = arquivo_objetos[indice].split('\n');
     //console.log(objetos);
     var qtd = linhas[0].split(' ');
     qtd[0] = parseInt(qtd[0]);
@@ -93,4 +123,3 @@ function decomporArquivo(){
     
 }
 
-*/
