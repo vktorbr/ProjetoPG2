@@ -90,3 +90,22 @@ function SomaVetores(vetorA,vetorB){
 
     return vetorC;
 }
+
+function matrizVetores(vetorA,vetorB,vetorC){
+    let matriz=[];
+    matriz[0]=vetorA;
+    matriz[1]=vetorB;
+    matriz[2]=vetorC;
+
+    return matriz;
+}
+
+function MultMatrizVetor(matriz, vetor){
+    let vetor_resultante = new Ponto();
+
+    vetor_resultante.x = produtoInterno(matriz[0],vetor);
+    vetor_resultante.y = produtoInterno(matriz[1],vetor);
+    vetor_resultante.z = produtoInterno(matriz[2],vetor);
+
+    return vetor_resultante;
+}

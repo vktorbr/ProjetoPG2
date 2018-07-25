@@ -5,6 +5,7 @@ class Objeto{
         this.qtd_triangulos = qtd_triangulos;
         this.pontos = pontos;
         this.triangulos = triangulos;
+        this.pontos_tela = [];
     }
 
     NormalTriangulo(){
