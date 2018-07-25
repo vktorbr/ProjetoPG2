@@ -18,18 +18,18 @@ var upFile = function(parametro) {
             //objectsFileReader.readAsText(objectsFileTobeRead);
             objectsFileReader[indice].onload = function (e) {
                 //console.log(objectsFileReader.result);
-                console.log(objectsFileReader);
+                //console.log(objectsFileReader);
                 for (let j = 0; j < objectsFileSelected.length; j++) {
-                    console.log(j);
+                    //console.log(j);
                 
                     arquivo_objetos[j] = objectsFileReader[j].result;
-                    console.log("\n\n\nDocumento objeto: \n\n");
-                    console.log(arquivo_objetos[j]);
+                    //console.log("\n\n\nDocumento objeto: \n\n");
+                    //console.log(arquivo_objetos[j]);
                     decomporArquivo(j); 
                 //indice++;
                 }
             }
-            console.log(objectsFileTobeRead);
+            //console.log(objectsFileTobeRead);
             while(indice<objectsFileSelected.length){
                 //objectsFileReader[indice] = new FileReader();
                 objectsFileReader[indice].readAsText(objectsFileTobeRead[indice]);
@@ -43,9 +43,9 @@ var upFile = function(parametro) {
         var cameraFileReader = new FileReader();
         cameraFileReader.onload = function (e){
             arquivo_camera = cameraFileReader.result;
-            console.log("\n\n\ndocumento camera:\n\n");
-            console.log(cameraFileReader.result);
-            
+            //console.log("\n\n\ndocumento camera:\n\n");
+            //console.log(cameraFileReader.result);
+            decomporArquivoCamera(arquivo_camera);
         }
         cameraFileReader.readAsText(cameraFileTobeRead);
     }
@@ -56,9 +56,9 @@ var upFile = function(parametro) {
         var illumFileReader = new FileReader();
         illumFileReader.onload = function (e){
             arquivo_iluminacao = illumFileReader.result;
-            console.log("\n\n\nDocumento iluminação:\n\n");
-            console.log(illumFileReader.result);
-            
+            //console.log("\n\n\nDocumento iluminação:\n\n");
+            //console.log(illumFileReader.result);
+            decomporArquivoIluminacao(arquivo_iluminacao);
             
         }
         illumFileReader.readAsText(illumFileTobeRead);
@@ -123,3 +123,66 @@ function decomporArquivo(indice){
     
 }
 
+function decomporArquivoCamera(arquivo){
+    let linhas = arquivo.split('\n');
+    //console.log(arquivo);
+
+    let c = linhas[0].split(' ');
+    let posicao_camera = new Ponto(parseFloat(c[0]), parseFloat(c[1]), parseFloat(c[2]));
+    //console.log(posicao_camera);
+
+    let n = linhas[1].split(' ');    
+    let vetor_N = new Vetor(parseFloat(n[0]), parseFloat(n[1]), parseFloat(n[2]));
+    //console.log(vetor_N);
+
+    let v = linhas[2].split(' ');
+    let vetor_V = new Vetor(parseFloat(v[0]), parseFloat(v[1]), parseFloat(v[2]));
+    //console.log(vetor_V);
+
+    let outros = linhas[3].split(' ');
+    let distancia = parseFloat(outros[0]);
+    let hx = parseFloat(outros[1]);
+    let hy = parseFloat(outros[2]);
+    //console.log(distancia, hx, hy);
+    
+    var camera1 = new Camera(posicao_camera, vetor_N, vetor_V, distancia, hx, hy);
+}
+
+function decomporArquivoIluminacao(arquivo){
+    let linhas = arquivo.split('\n');
+    console.log(linhas);
+
+    let l = linhas[0].split(' ');
+    let posicao_luz = new Ponto(parseFloat(l[0]), parseFloat(l[1]), parseFloat(l[2]));
+    console.log(posicao_luz);
+
+    let aux = linhas[1].split(' ');
+    let ka = parseFloat(aux[0]);
+    console.log(ka);
+
+    let corA = linhas[2].split(' ');
+    let Ia = new Vetor(parseFloat(corA[0]), parseFloat(corA[1]), parseFloat(corA[2]));
+    console.log(Ia);
+    
+    let aux2 = linhas[3].split(' ');
+    let kd = parseFloat(aux2[0]);
+    console.log(kd);
+
+    let dif = linhas[4].split(' ');
+    let Od = new Vetor(parseFloat(dif[0]), parseFloat(dif[1]), parseFloat(dif[2]));
+    console.log(Od);
+
+    let esp = linhas[5].split(' ');
+    let ks = parseFloat(esp[0]);
+    console.log(ks);
+    
+    let corL = linhas[6].split(' ');
+    let Il = new Vetor(parseFloat(corL[0]), parseFloat(corL[1]), parseFloat(corL[2]));
+    console.log(Il);
+
+    let rugo = linhas[7].split(' ');
+    let n = parseFloat(rugo[0]);
+    console.log(n);
+
+    var iluminacao1 = new Iluminacao(posicao_luz, ka, Ia, kd, Od, ks, Il, n);
+}
