@@ -8,7 +8,7 @@ var upFile = function(parametro) {
         var objectsFileSelected = document.getElementById('id_objetos').files;
         //for (let i = 0; i < objectsFileSelected.length; i++) {
             var objectsFileTobeRead = objectsFileSelected;
-            //console.log(objectsFileSelected[i].name);
+            //console.log(objectsFileSelected[0].name);
             let indice=0;
             var objectsFileReader = [];
             for (let i = 0; i < objectsFileSelected.length; i++) {
@@ -17,19 +17,26 @@ var upFile = function(parametro) {
             //objectsFileReader = new FileReader();
             //objectsFileReader.readAsText(objectsFileTobeRead);
             objectsFileReader[indice].onload = function (e) {
-                //console.log(objectsFileReader.result);
-                console.log(objectsFileReader);
-                for (let j = 0; j < objectsFileSelected.length; j++) {
-                    console.log(j);
+                //console.log(objectsFileReader);
                 
+                //console.log(objectsFileReader.result);
+                //console.log(objectsFileReader);
+                for (let j = 0; j < objectsFileSelected.length; j++) {
+                    //console.log(j);
+                    //console.log(objectsFileReader[j]);
+                    
                     arquivo_objetos[j] = objectsFileReader[j].result;
-                    console.log("\n\n\nDocumento objeto: \n\n");
-                    console.log(arquivo_objetos[j]);
-                    decomporArquivo(j); 
+                    let nome = objectsFileSelected[j].name;
+                   // console.log("\n\n\nDocumento objeto: \n\n");
+                   // console.log(arquivo_objetos[j]);
+                   
+                   //console.log(nome);
+                   
+                    decomporArquivo(j,nome); 
                 //indice++;
                 }
             }
-            console.log(objectsFileTobeRead);
+            //console.log(objectsFileTobeRead);
             while(indice<objectsFileSelected.length){
                 //objectsFileReader[indice] = new FileReader();
                 objectsFileReader[indice].readAsText(objectsFileTobeRead[indice]);
@@ -43,8 +50,8 @@ var upFile = function(parametro) {
         var cameraFileReader = new FileReader();
         cameraFileReader.onload = function (e){
             arquivo_camera = cameraFileReader.result;
-            console.log("\n\n\ndocumento camera:\n\n");
-            console.log(cameraFileReader.result);
+            //console.log("\n\n\ndocumento camera:\n\n");
+            //console.log(cameraFileReader.result);
             
         }
         cameraFileReader.readAsText(cameraFileTobeRead);
@@ -56,8 +63,8 @@ var upFile = function(parametro) {
         var illumFileReader = new FileReader();
         illumFileReader.onload = function (e){
             arquivo_iluminacao = illumFileReader.result;
-            console.log("\n\n\nDocumento iluminação:\n\n");
-            console.log(illumFileReader.result);
+            //console.log("\n\n\nDocumento iluminação:\n\n");
+            //console.log(illumFileReader.result);
             
             
         }
@@ -65,7 +72,7 @@ var upFile = function(parametro) {
         
     }
 }
-var objetos ="";
+//var objetos ="";
 /*
 window.onload = function () {
     //Verifica se o navegador suporta a api
@@ -88,12 +95,14 @@ window.onload = function () {
     }
 }*/
 
-function decomporArquivo(indice){
+function decomporArquivo(indice, nome){
     var linhas = arquivo_objetos[indice].split('\n');
-    //console.log(objetos);
+    //console.log(linhas);
     var qtd = linhas[0].split(' ');
     qtd[0] = parseInt(qtd[0]);
     qtd[1] = parseInt(qtd[1]);
+
+    //console.log(qtd);
     
     
     var pts;
@@ -105,7 +114,8 @@ function decomporArquivo(indice){
         ponto = pts.split(' ');
         pontosVet[i-1] = new Ponto(ponto[0],ponto[1],ponto[2]);
     }
-
+    //console.log(pontosVet);
+    
     var tri;
     var triangulo;
     var triangulosTri = [];
@@ -113,13 +123,27 @@ function decomporArquivo(indice){
         tri = linhas[a];
         
         triangulo =tri.split(' ');
-        triangulosTri[a-1-qtd[0]] = new Triangulo(new Vertice(pontosVet[triangulo[0]-1]),new Vertice(pontosVet[triangulo[1]-1]),new Vertice(pontosVet[triangulo[2]-1]));
+        //console.log(triangulo);
+        //console.log(triangulo[0],triangulo[1],triangulo[2]);
+        
+        //console.log(new Vertice(pontosVet[triangulo[0]-1]),new Vertice(pontosVet[triangulo[1]-1]),new Vertice(pontosVet[triangulo[2]-1]));
+        //console.log(a);
+        
+        //triangulosTri[a-1-qtd[0]] = new Triangulo(new Vertice(pontosVet[triangulo[0]-1]),new Vertice(pontosVet[triangulo[1]-1]),new Vertice(pontosVet[triangulo[2]-1]));
+        //triangulosTri[a-1-qtd[0]] = new Triangulo(pontosVet[triangulo[0]-1],pontosVet[triangulo[1]-1],pontosVet[triangulo[2]-1]);/*Correto*/
+        triangulosTri[a-1-qtd[0]] = new Triangulo(triangulo[0]-1,triangulo[1]-1,triangulo[2]-1);
+        
     }
-    
-    var objeto1 = new Objeto(qtd[0],qtd[1],pontosVet,triangulosTri);
-    objeto1.NormalVertices();
-    //console.log(objeto1);
+   //console.log(triangulosTri);
 
+   let posicao_string = nome.indexOf(".");
+   nome = nome.substring(0,posicao_string);
+
+    Objetos[Objetos.length] = new Objeto(nome,qtd[0],qtd[1],pontosVet,triangulosTri);
+    /*objeto1.NormalTriangulo();
+    objeto1.NormalVertices();
+    console.log(objeto1);*/
+    ObjetoCriado();
     
 }
 
