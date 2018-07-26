@@ -61,7 +61,7 @@ function mudarCoordenadasVista(){
 //Função para calcular as normais dos triangulos e das suas vertices
 function normais_Triangulos_Vertices(){
     Objetos[Objetos.length-1].NormalTriangulo();
-    Objetos[Objetos.length-1].NormalVertices();
+    //Objetos[Objetos.length-1].NormalVertices();
 }
 
 //Função para normalizar as normais dos triangulos e vertices
@@ -88,8 +88,8 @@ function projecaoPespectiva(){
     for (let i = 0; i < Objetos.length; i++) {
         for (let j = 0; j < Objetos[i].pontos.length; j++) {
             Objetos[i].pontos_tela[j] = new Ponto();
-            Objetos[i].pontos_tela[j].x = (Objetos[i].pontos[j].x/Objetos[i].pontos[j].z)*(camera.d/camera.hx);
-            Objetos[i].pontos_tela[j].y = (Objetos[i].pontos[j].y/Objetos[i].pontos[j].z)*(camera.d/camera.hy);
+            Objetos[i].pontos_tela[j].x = ((Objetos[i].pontos[j].x/Objetos[i].pontos[j].z)*(camera.d/camera.hx));
+            Objetos[i].pontos_tela[j].y = ((Objetos[i].pontos[j].y/Objetos[i].pontos[j].z)*(camera.d/camera.hy));
             Objetos[i].pontos_tela[j].z = 0;
         }
     }
@@ -104,8 +104,8 @@ function mudarCoordenadasTela(){
             let ptX = Objetos[i].pontos_tela[j].x;
             let ptY = Objetos[i].pontos_tela[j].y;
            
-            Objetos[i].pontos_tela[j].x = parseInt(((ptX+1)/2)*telaX);
-            Objetos[i].pontos_tela[j].y = parseInt(((1-ptY)/2)*telaY);
+            Objetos[i].pontos_tela[j].x = parseInt(((ptX+1)*telaX)/2);
+            Objetos[i].pontos_tela[j].y = parseInt(((1-ptY)*telaY)/2);
 
         }
     }
@@ -328,11 +328,11 @@ function desenhador(Xmin,Xmax,Yscan,vt1,vt2,vt3,objetoIndice){
                 CIlum.z = 255;
             }
 
-            console.log(CIlum);
+            //console.log(CIlum);
             
             bufferCor[p.x][p.y] = CIlum;
             //draw();
-            console.log(Ca,Cd,Cs);
+            //console.log(Ca,Cd,Cs);
             
         }
 
@@ -417,7 +417,7 @@ function desenhadorBaixo(Xmin,Xmax,Yscan,vt1,vt2,v3,objetoIndice){
             }
 
             bufferCor[p.x][p.y] = CIlum;
-            console.log(Ca,Cd,Cs);
+            //console.log(Ca,Cd,Cs);
             
             //draw();
         }
@@ -501,7 +501,7 @@ function desenhadorCima(Xmin,Xmax,Yscan,vt1,v2,vt3,objetoIndice){
             }
 
             bufferCor[p.x][p.y] = CIlum;
-            console.log(Ca,Cd,Cs);
+            //console.log(Ca,Cd,Cs);
             
         }
 
@@ -540,9 +540,9 @@ function acharBaricentro(p,v1,v2,v3){
     let area3 = parseFloat(normaVetor(produtoVetorial(SubtracaoPontos(v1,v2),SubtracaoPontos(v1,p))))/2;
     //console.log(area, area1, area2, area3);
 
-    let gama = (parseFloat(area1)/parseFloat(area));
+    let gama = (parseFloat(area3)/parseFloat(area));
     let beta = (parseFloat(area2)/parseFloat(area));
-    let alfa = (parseFloat(area3)/parseFloat(area));
+    let alfa = (parseFloat(area1)/parseFloat(area));
 
     baricentro[0] = alfa ;//alfa
     baricentro[1] = beta ;//beta

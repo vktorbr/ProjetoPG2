@@ -3,7 +3,7 @@ class Ponto{
         this.x = x;
         this.y = y;
         this.z = z;
-        this.normal = null;
+        this.normal = new Vetor(0,0,0);
     }
 }
 
