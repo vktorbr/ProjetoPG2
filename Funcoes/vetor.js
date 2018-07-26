@@ -27,6 +27,16 @@ function produtoInterno(vetorA,vetorB){
     return escalar;
 }
 
+function MultiplicacaoComponenteComponente(vetorA,vetorB){
+    let vetorC = new Vetor();
+
+    vetorC.x = (vetorA.x*vetorB.x);
+    vetorC.y = (vetorA.y*vetorB.y);
+    vetorC.z = (vetorA.z*vetorB.z);
+    
+    return vetorC;
+}
+
 function projecaoVetores(vetorB,vetorA){
     let escalar = (produtoInterno(vetorA,vetorB)/produtoInterno(vetorB,vetorB)); 
     let proj = new Vetor();
@@ -51,11 +61,11 @@ function multiplicarVetorPorEscalar(escalar, vetorA){
 function moduloVetor(vetorA){
     let modulo;
     modulo = 0;
-    modulo += (Math.pow(vetorA.x, 2));
+    /*modulo += (Math.pow(vetorA.x, 2));
     modulo += (Math.pow(vetorA.y, 2));
     modulo += (Math.pow(vetorA.z, 2));
-    modulo = Math.sqrt(modulo);
-
+    modulo = Math.sqrt(modulo);*/
+    modulo = Math.sqrt((vetorA.x*vetorA.x)+(vetorA.y*vetorA.y)+(vetorA.z*vetorA.z));
     return modulo;
 }
 
@@ -89,4 +99,51 @@ function SomaVetores(vetorA,vetorB){
     vetorC.z = vetorA.z+vetorB.z;
 
     return vetorC;
+}
+function SubtracaoVetores(vetorA,vetorB){
+    let vetorC = new Vetor();
+    vetorC.x = vetorA.x-vetorB.x;
+    vetorC.y = vetorA.y-vetorB.y;
+    vetorC.z = vetorA.z-vetorB.z;
+
+    return vetorC;
+}
+function SubtracaoVetorPonto(vetorA,ponto){
+    let vetorC = new Vetor();
+    vetorC.x = vetorA.x-ponto.x;
+    vetorC.y = vetorA.y-ponto.y;
+    vetorC.z = vetorA.z-ponto.z;
+
+    return vetorC;
+}
+
+function matrizVetores(vetorA,vetorB,vetorC){
+    let matriz=[];
+    matriz[0]=vetorA;
+    matriz[1]=vetorB;
+    matriz[2]=vetorC;
+
+    return matriz;
+}
+
+function MultMatrizVetor(matriz, vetor){
+    let vetor_resultante = new Ponto();
+
+    vetor_resultante.x = produtoInterno(matriz[0],vetor);
+    vetor_resultante.y = produtoInterno(matriz[1],vetor);
+    vetor_resultante.z = produtoInterno(matriz[2],vetor);
+
+    return vetor_resultante;
+}
+
+function normaVetor(vetor){
+
+    let norma=0;
+
+    norma += Math.pow(vetor.x,2);
+    norma += Math.pow(vetor.y,2);
+    norma += Math.pow(vetor.z,2);
+    norma = Math.sqrt(norma);
+
+    return norma;
 }

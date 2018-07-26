@@ -5,6 +5,7 @@ class Objeto{
         this.qtd_triangulos = qtd_triangulos;
         this.pontos = pontos;
         this.triangulos = triangulos;
+        this.pontos_tela = [];
     }
 
     NormalTriangulo(){
@@ -20,9 +21,13 @@ class Objeto{
             N = produtoVetorial(U,V);
         
             this.triangulos[index].normal = N;
+
+            this.pontos[this.triangulos[index].vertice1].normal = SomaVetores(this.pontos[this.triangulos[index].vertice1].normal,normalizarVetor(N));
+            this.pontos[this.triangulos[index].vertice2].normal = SomaVetores(this.pontos[this.triangulos[index].vertice2].normal,normalizarVetor(N));
+            this.pontos[this.triangulos[index].vertice3].normal = SomaVetores(this.pontos[this.triangulos[index].vertice3].normal,normalizarVetor(N));
         }
     }
-
+/*
     NormalVertices(){
         for (let i = 0; i < this.triangulos.length; i++) {
             if(this.pontos[this.triangulos[i].vertice1].normal == null){//Verificar se já foi feita a norma deste vertice!
@@ -94,7 +99,7 @@ class Objeto{
                 this.pontos[this.triangulos[i].vertice3].normal =multiplicarVetorPorEscalar(1/cont,somador);
             }
         }
-    }
+    }*/
 
 }
 
