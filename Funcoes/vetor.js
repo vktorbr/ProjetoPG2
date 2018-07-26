@@ -27,6 +27,16 @@ function produtoInterno(vetorA,vetorB){
     return escalar;
 }
 
+function MultiplicacaoComponenteComponente(vetorA,vetorB){
+    let vetorC = new Vetor();
+
+    vetorC.x = (vetorA.x*vetorB.x);
+    vetorC.y = (vetorA.y*vetorB.y);
+    vetorC.z = (vetorA.z*vetorB.z);
+    
+    return vetorC;
+}
+
 function projecaoVetores(vetorB,vetorA){
     let escalar = (produtoInterno(vetorA,vetorB)/produtoInterno(vetorB,vetorB)); 
     let proj = new Vetor();
@@ -87,6 +97,22 @@ function SomaVetores(vetorA,vetorB){
     vetorC.x = vetorA.x+vetorB.x;
     vetorC.y = vetorA.y+vetorB.y;
     vetorC.z = vetorA.z+vetorB.z;
+
+    return vetorC;
+}
+function SubtracaoVetores(vetorA,vetorB){
+    let vetorC = new Vetor();
+    vetorC.x = vetorA.x-vetorB.x;
+    vetorC.y = vetorA.y-vetorB.y;
+    vetorC.z = vetorA.z-vetorB.z;
+
+    return vetorC;
+}
+function SubtracaoVetorPonto(vetorA,ponto){
+    let vetorC = new Vetor();
+    vetorC.x = vetorA.x-ponto.x;
+    vetorC.y = vetorA.y-ponto.y;
+    vetorC.z = vetorA.z-ponto.z;
 
     return vetorC;
 }
