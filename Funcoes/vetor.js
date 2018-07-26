@@ -135,3 +135,15 @@ function MultMatrizVetor(matriz, vetor){
 
     return vetor_resultante;
 }
+
+function normaVetor(vetor){
+
+    let norma=0;
+
+    norma += Math.pow(vetor.x,2);
+    norma += Math.pow(vetor.y,2);
+    norma += Math.pow(vetor.z,2);
+    norma = Math.sqrt(norma);
+
+    return norma;
+}
